@@ -1,18 +1,45 @@
-# daily_python
-for practicing python
 
----------------------------------------------------------------------
-* 1-calculator : this is a simple program to learn function, Conditional statement (if , elif , ...).
-   the pragram can be called from bash by: python 1-calculator.py
 
-  * for dockerizing this proj simply I did the following:
-    1- make a directory which include the followng:
-    calculator_project/
-├── calculator.py
+# daily\_python
+
+A simple collection of Python practice projects.
+
+---
+
+## 1-calculator
+
+This is a simple Python program to learn about:
+
+* Functions
+* Conditional statements (`if`, `elif`, etc.)
+
+You can run the program from the terminal using:
+
+```bash
+python 1-calculator.py
+```
+
+---
+
+## Dockerizing the Calculator Project
+
+You can also run this project in a Docker container.
+
+### Step 1: Project Structure
+
+Create a directory with the following contents:
+
+```
+calculator_project/
+├── 1-calculator.py
 └── Dockerfile
+```
 
----------------------------------------------------------------------
-    2- by (touch Dockerfile) and (nano Dockerfile) write a Docker file which include the following:
+### Step 2: Dockerfile Content
+
+Create a Dockerfile using `touch Dockerfile`, then open it with a text editor (`nano Dockerfile`) and paste the following content:
+
+```dockerfile
 # Use official Python base image
 FROM python:3.11-slim
 
@@ -24,33 +51,38 @@ COPY 1-calculator.py .
 
 # Set the default command to run the calculator
 CMD ["python", "1-calculator.py"]
+```
 
----------------------------------------------------------------------
-   3- then simply build you 
-   docker build -t calculator-app .
+---
 
-   explanation:
--t stands for tag. You're naming (or tagging) the image as calculator-app. This makes it easier to refer to later when you want to run it (e.g., docker run calculator-app).
+### Step 3: Build the Docker Image
 
-. (dot)
-This tells Docker to look in the current directory for the Dockerfile and all the files it needs to build the image.
+Run the following command in your terminal:
 
----------------------------------------------------------------------
+```bash
+docker build -t calculator-app .
+```
 
-   4- then it can be used (after cloning) by the following command:
-   docker run -it calculator-app
-    **explanation**:
-docker run
-This command tells Docker to start a new container from an image.
+#### Explanation:
 
--i
-This stands for interactive. It keeps the standard input (stdin) open so you can interact with the container (type inputs, like in your calculator).
+* `-t calculator-app` — Tags the image with the name `calculator-app`.
+* `.` — Uses the current directory (which should contain the Dockerfile and `1-calculator.py`) as the build context.
 
--t
-This stands for tty (teletypewriter). It allocates a pseudo-terminal, which basically means it makes the container's command line behave like a real terminal. This is important for interactive programs.
+---
 
-calculator-app
-This is the name (tag) of the Docker image you want to run. It should be the image you built earlier using docker build -t calculator-app .
+### Step 4: Run the Docker Container
+
+Once the image is built, you can run it using:
+
+```bash
+docker run -it calculator-app
+```
+
+#### Explanation:
+
+* `docker run` — Tells Docker to start a container.
+* `-i` — Keeps the input open so you can interact with the program.
+* `-t` — Allocates a terminal so input/output behaves like a real console.
+* `calculator-app` — The name of the image to run.
 
 
-  
